@@ -1,0 +1,15 @@
+<!--pages/caigouDetails/caigouDetails.wxml-->
+
+<view><text>采购产品：</text>
+  <textarea value='{{title}}' disabled='disabled'/>
+</view>
+<view><text>采购数量：</text><text>{{quantity}}</text></view>
+<view><text>发布时间：</text><text>{{createTime}}</text></view>
+<view><text>有效时间：</text><text>{{validDay}}</text></view>
+<view><text>联系人：</text><text>{{contactMan}}</text></view>
+<view><text>联系方式：</text><text>{{mobile}}</text></view>
+<view><text>免责声明：</text>
+  <text>以上所展示的信息由买家自行发起，内容的真实性、准确性和合法性由发布者负责，神州商桥网只提供采购信息，一切交易将视为客户自行自愿交易，对交易风险由交易上方自行负责，神州商桥网对此不承担任何保证责任。</text>
+</view>
+
+

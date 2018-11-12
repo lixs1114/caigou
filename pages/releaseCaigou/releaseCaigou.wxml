@@ -1,0 +1,48 @@
+<!--pages/releaseCaigou/releaseCaigou.wxml-->
+<form>
+<view class="section">
+  <picker bindchange="bindPickerChange" value="{{index}}" range="{{array}}">
+    <view class="picker">
+     产品类别：{{array[index]}}
+    </view>
+  </picker>
+</view>
+<view class="section">
+  <text>采购商品：</text>
+  <textarea  placeholder='请简单输入商品名称或特征，不超过30个字' />
+</view>
+<view class="section">
+  <text>数量：</text>
+    <input type='text'  auto-focus/>
+    <button>面议</button>
+</view>
+<view class="section">
+  <text>有效期：</text>
+<radio-group class="radio-group" bindchange="radioChange">
+    <radio value="0"/>7天
+    <radio value="1"/>30天
+    <radio value="2"/>长期
+</radio-group>
+<view class="section__title">日期选择器</view>
+  <picker mode="date" value="{{date}}" start="2015-09-01" end="2017-09-01" bindchange="bindDateChange">
+    <view class="picker">
+      当前选择: {{date}}
+    </view>
+  </picker>
+</view>
+<view class="section">
+  <text>联系人：</text>
+   <input type='text' placeholder='请输入联系人称呼' auto-focus/>
+</view>
+<view class="section">
+  <text>手机号码：</text>
+   <input type='text' placeholder='请输入手机号码' auto-focus/>
+</view>
+<view class="section">
+  <text>号码验证：</text>
+   <input type='text' placeholder='非必填' auto-focus/>
+   <button>获取验证码</button>
+   <text>号码验证信息将提升可信度，优先推荐</text>
+</view>
+<button bindtap="add" type="primary" class="address-add">发布</button>
+</form>

@@ -2,12 +2,21 @@
   "pages": [
     "pages/caigouList/caigouList",
     "pages/index/index",
-    "pages/logs/logs"
+    "pages/logs/logs",
+    "pages/city/city",
+    "pages/caigouDetails/caigouDetails",
+    "pages/releaseCaigou/releaseCaigou"
+  
   ],
   "window": {
     "backgroundTextStyle": "light",
     "navigationBarBackgroundColor": "#fff",
-    "navigationBarTitleText": "WeChat",
+    "navigationBarTitleText": "采购列表",
     "navigationBarTextStyle": "black"
-  }
+  },
+  "networkTimeout": {
+    "request": 10000,
+    "downloadFile": 10000
+  },
+  "debug": true
 }
