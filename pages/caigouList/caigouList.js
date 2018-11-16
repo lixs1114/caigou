@@ -50,11 +50,8 @@ Page({
       },
       success: function (res) {
         console.log(res.data)
-        //console.log(res.data.imgListData[0].tag)
-        //将获取到的json数据，存在名字叫list_data的这个数组中
         _this.setData({
-          list_data: res.data.data.purchase,
-          //res代表success函数的事件对，data是固定的，imgListData是上面json数据中imgListData
+          list_data: res.data.data.purchase
         })
       }
     })
