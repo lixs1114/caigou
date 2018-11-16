@@ -36,7 +36,6 @@ App({
   },
   globalData: {
     userInfo: null,
-    webContext:'http://localhost:8080',
-    locationInfo:null
+    webContext:'http://localhost:8080'
   }
 })
