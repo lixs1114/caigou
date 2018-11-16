@@ -1,18 +1,25 @@
 <!--pages/caigouList/caigouList.wxml-->
 <view class="sort-list">
   <view class="sort" bindtap="changeBoxBtn" data-num="0">
-    产品类别
-    <image src="" style="width:8px;height:8px;"></image>
+    <picker bindchange="bindPickerChange1" range-key='classify_title' range="{{productCatList}}" >
+      <view class="picker">
+        <text> 产品类别</text>
+        <image src="" style="width:8px;height:8px;"></image>
+      </view>
+    </picker>
   </view>
   <view class="sort" bindtap="chooseCity"> 地区
     <image src="" style="width:9px;height:9px;"></image>
   </view>
-  <view class="sort" bindtap="changeBoxBtn" data-num="1"> 手机验证
-    <image src="" style="width:9px;height:9px;"></image>
+  <view class="sort" bindtap="changeBoxBtn" data-num="1"> 
+    <picker bindchange="bindPickerChange2" range-key='name' range="{{verifyList}}">
+      <view class="picker">
+        <text> 手机验证</text>
+        <image src="" style="width:8px;height:8px;"></image>
+      </view>
+    </picker>
   </view>
 </view>
-
-
 <view class='list-box'>
     <view class='list-li mflex'  wx:for="{{list_data}}" bindtap="toDetails" data-id="{{item.purchase_id}}">   
         <view  class='list-tit'><text>采购产品:{{item.purchase_title}}</text><text>有效天数:{{item.valid_day}}</text></view>    
@@ -21,26 +28,4 @@
     </view>
 </view>
 <button bindtap="toReleaseCaigou" type="primary" class="address-add">发布采购</button>
-
-<form>
-  <view class="all-sort-list {{states==1?'all-act':''}}">
-    <picker-view indicator-style="height: 50px;" style="width: 100%; height: 300px;" value="{{value}}" bindchange="bindChange">
-      <picker-view-column>
-        <view wx:for="{{verifyList}}" style="line-height: 50px" wx:key="id">{{item}} </view>
-      </picker-view-column>
-    </picker-view>
-    <button bindtap='closeView'>取消</button>
-    <button>确定</button>
-  </view>
-</form>
-<form>
-  <view class="nearby-sort-list {{states==0?'nearby-act':''}}">
-    <picker-view indicator-style="height: 50px;" style="width: 100%; height: 300px;" value="{{value}}" bindchange="bindChange">
-      <picker-view-column>
-        <view wx:for="{{productCatList}}" style="line-height: 50px" wx:key="id">{{item}} </view>
-      </picker-view-column>
-    </picker-view>
-    <button bindtap='closeView'>取消</button>
-    <button>确定</button>
-  </view>
-</form>
+  

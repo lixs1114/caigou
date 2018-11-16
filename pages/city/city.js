@@ -8,7 +8,11 @@ Page({
   },
 
   bindtap(e) {
-    console.log(e.detail)
+    console.log(e.detail.name)
+    var city = e.detail.name;
+    wx.redirectTo({
+      url: '../../pages/caigouList/caigouList?city=' + city
+    })
   },
   input(e) {
     this.value = e.detail.value

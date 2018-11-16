@@ -11,10 +11,7 @@ Component({
         this.resetRight(newVal);
       }
     },
-    myCity: {
-      type: String,
-      value: "",
-    },
+  
     // 用于外部组件搜索使用
     search: {
       type: String,
@@ -31,7 +28,7 @@ Component({
     list: [],
     rightArr: [],// 右侧字母展示
     jumpNum: '',//跳转到那个字母
-    myCityName: '请选择' // 默认我的城市
+    myCity: '请选择' // 默认我的城市
 
   },
   ready() {
@@ -53,15 +50,32 @@ Component({
         rightArr
       })
     },
+   
     getCity() {
-      wx.getLocation({
+      var _this=this;
+      wx.getLocation({ //没有特别说明的都是固定写法
         type: 'wgs84',
         success: function (res) {
-          this.latitude = res.latitude;
-          this.longitude = res.longitude;
-          // console.log(res)
+          console.log('location', res);
+          var locationString = ''+res.latitude + "," + res.longitude+'';
+          wx.request({
+            url: 'http://apis.map.qq.com/ws/geocoder/v1/',
+            data: {
+              "key": "26BBZ-KFKRF-TOMJH-JQWEN-PSVQT-UNFH6",
+              "location": locationString
+            },
+            method: 'GET',
+            success: function (r) {
+              //输出一下位置信息
+              console.log('用户位置信息', r.data.result.address_component.city);
+              _this.setData({
+                myCity: r.data.result.address_component.city
+              })
+            }
+          });
+         
         }
-      })
+      });
     },
     // 右侧字母点击事件
     jumpMt(e) {
@@ -116,8 +130,7 @@ Component({
     },
     // 城市定位
     locationMt() {
-      // TODO 暂时没有实现 定位自己的城市，需要引入第三方api
-    }
-
+      
+    }   
   }
 })

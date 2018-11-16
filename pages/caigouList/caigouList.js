@@ -1,36 +1,34 @@
 // pages/caigouList/caigouList.js
 var webContext = getApp().globalData.webContext
 var index =1
-
+var proCat=''
+var city=''
+var verity=''
+var productCat=[]
+var verifyJson = [{
+  "code":'',
+  "name": "全部"
+}, {
+  "code": 1,
+  "name": "手机号码已验证"
+}
+]
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-    verifyList: ['全部', '手机号码已验证'],
-    productCatList: ['电脑主机','电脑配件']
+    verifyList: verifyJson ,
+    productCatList: productCat
   },
-  changeBoxBtn: function (e) {
-    var num = e.target.dataset.num;
-    var states = null;
-    states= num;
-    this.setData({
-      states: states
-    })
+  bindPickerChange1: function (e) {
+    proCat = productCat[e.detail.value].classify_id;
+    this.loadData();
   },
-
-  bindChange: function (e) {
-    const val = e.detail.value
-    this.setData({
-     
-    })
-
-  }, 
-  closeView: function (e) {
-    this.setData({
-      states: null
-    })
+  bindPickerChange2: function (e) {
+    verity=verifyJson[e.detail.value].code;
+    this.loadData();
   },
   chooseCity: function (e) {
     wx.navigateTo({
@@ -40,7 +38,13 @@ Page({
   loadData:function(){
     var _this = this
     wx.request({
-      url: webContext + '/ebridge_h5/caigou/getListByPage?user_id=2069&index='+index,//json数据地址
+      url: webContext + '/ebridge_h5/caigou/getListByPage',//json数据地址
+      data: {
+        index: index,
+        city: city,
+        verity: verity,
+        proCat: proCat
+      },
       headers: {
         'Content-Type': 'application/json'
       },
@@ -66,12 +70,29 @@ Page({
       url: '../../pages/releaseCaigou/releaseCaigou'
     })
   },
-  
+  loadproCat: function () {
+    var _this = this
+    wx.request({
+      url: webContext + '/ebridge_h5/caigou/proCategory',//json数据地址
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      success: function (res) {
+        _this.setData({
+          productCatList: res.data.data.pro_classify
+        })
+        productCat = res.data.data.pro_classify
+      }
+    })
+  },
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    
+    if (options.city) {
+      city = options.city
+    }
+    this.loadproCat();
     this.loadData();
  
   },
