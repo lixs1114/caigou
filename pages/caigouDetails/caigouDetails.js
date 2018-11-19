@@ -1,5 +1,6 @@
 // pages/caigouDetails/caigouDetails.js
-var webContext = getApp().globalData.webContext
+var webContext = getApp().globalData.webContext;
+var phoneNo='';
 Page({
 
   /**
@@ -8,7 +9,17 @@ Page({
   data: {
 
   },
-
+  phoneCall: function () {
+    wx.makePhoneCall({
+      phoneNumber: phoneNo,
+      success: function () {
+        console.log("拨打电话成功！")
+      },
+      fail: function () {
+        console.log("拨打电话失败！")
+      }
+    })
+  },
   /**
    * 生命周期函数--监听页面加载
    */
@@ -22,6 +33,7 @@ Page({
       },
       success: function (res) {
         console.log(res.data)
+        phoneNo = res.data.data.contact_phone;
         _this.setData({
           title: res.data.data.purchase_title,
           quantity: res.data.data.release_number,
@@ -82,4 +94,5 @@ Page({
   onShareAppMessage: function () {
 
   }
+ 
 })

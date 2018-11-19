@@ -37,9 +37,17 @@ Page({
     phoneNo = e.detail.value;
   },
   getCaptcha:function(){
-    var _this = this
-  
-    _this.settime();
+    if (phoneNo){
+      var _this = this
+      _this.settime();
+    }else{
+      wx.showModal({
+        title: '提示',
+        content: '请输入手机号码',
+        showCancel: false
+      })
+    }
+   
   },
  
 settime:function() { 
